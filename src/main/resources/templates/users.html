@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Add Book</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<style>
+p{
+    color:red;
+}
+div.wylog{
+float:right
+}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+h2{
+    text-align:center;
+}
+</style>
+<body>
+
+<div class="wylog" >
+    <form action="/logout">
+        <button type="submit">Log Out</button>
+    </form>
+</div>
+
+
+<div class="container">
+    <h2>User Table</h2>
+    <span th:unless="${userinfo == null}">
+            <h2  th:text="${userinfo}"></h2>
+    </span>
+    <div th:switch="${zamowienia}">
+        <table>
+            <tr>
+
+                <th>Id</th>
+                <th>Role</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Birthdate</th>
+                <th>Age</th>
+                <th>Modify</th>
+                <th>Delete</th>
+            </tr>
+            <th:block th:each="user : ${users}">
+                <tr>
+                    <form class="form-signin" method="post" action="/update" >
+
+                    <td >
+                        <input size="2"readonly="readonly"  th:value="${user.id}" type="text" id="id" name="id" required >
+                    </td>
+                    <td >
+                        <input size="4"  th:value="${user.adminRole}" type="text" id="adminRole" name="adminRole" required >
+                    </td>
+                    <td >
+                        <input size="10"  th:value="${user.name}" type="text" id="name" name="name" required >
+                    </td>
+                    <td >
+                        <input maxlength="15"  th:value="${user.password}" type="text" id="password" name="password" required >
+                    </td>
+                    <td >
+                        <input    th:value="${user.email}" type="text" id="email" name="email" required >
+                    </td>
+                    <td>
+                        <input  th:value="${user.dob}" type="date" id="dob" name="dob" required>
+                    </td>
+                    <td >
+                        <input min="18" size="3"  th:value="${user.age}" type="number" id="age" name="age" required >
+                    </td>
+                        <td >
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+                        </td>
+
+                    </form>
+                    <td >
+                    <form class="form-signin" method="post" action="/delete" >
+                     <input size="2"  th:value="${user.id}" type="hidden" id="id_del" name="id_del" required >
+                     <button class="btn btn-lg btn-primary btn-block" type="submit">Delete</button>
+
+                    </form>
+                    </td>
+                </tr>
+            </th:block>
+
+
+
+        </table>
+    </div>
+    <form class="form-signin" method="get" action="view/1" >
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Back</button>
+    </form>
+
+
+</div>
+</body></html>

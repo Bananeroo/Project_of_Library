@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Add Book</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<style>
+p{
+    color:red;
+}
+div.wylog{
+float:right
+}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<body>
+
+<div class="wylog" >
+    <form action="/logout">
+        <button type="submit">Log Out</button>
+    </form>
+</div>
+
+
+<div class="container">
+    <h2>Order Table</h2>
+
+    <div th:switch="${zamowienia}">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Client Id</th>
+            <th>Email</th>
+            <th>Book Id</th>
+            <th>Book title</th>
+            <th>Returned?</th>
+            <th>Return/Delete Entry </th>
+        </tr>
+        <th:block th:each="zamowienie : ${zamowienia}">
+            <tr>
+                <td th:text="${zamowienie.id}"> </td>
+                <td th:text="${zamowienie.client_id}"> </td>
+                <td th:text="${zamowienie.client_name}"> </td>
+                <td th:text="${zamowienie.book_id}"> </td>
+                <td th:text="${zamowienie.book_name}"> </td>
+                <span th:if="${zamowienie.returned == false}">
+                <td> No </td>
+                </span>
+                <span th:if="${zamowienie.returned == true}">
+                <td> YES </td>
+                </span>
+
+                <span th:if="${zamowienie.returned == true}">
+                    <td>
+                        <form class="form-signin" method="post" action="/deleted" >
+                            <input type="hidden" id="id_del" name="id_del"  th:value="${zamowienie.id}"class="form-control" required >
+                             <button class="btn btn-lg btn-primary btn-block" type="submit">&#88</button>
+                        </form>
+                    </td>
+                </span>
+                <span th:if="${zamowienie.returned == false}">
+                         <td>
+                        <form class="form-signin" method="post" action="/returned" >
+                            <input type="hidden" id="id" name="id"  th:value="${zamowienie.id}"class="form-control" required >
+                            <input type="hidden" id="id_book" name="id_book"  th:value="${zamowienie.book_id}"class="form-control" required >
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">&#10003</button>
+                        </form>
+                    </td>
+                </span>
+
+
+
+            </tr>
+        </th:block>
+
+
+
+    </table>
+    </div>
+    <form class="form-signin" method="get" action="view/1" >
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Back</button>
+    </form>
+
+
+</div>
+</body></html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Add Book</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<style>
+p{
+    color:red;
+}
+div.wylog{
+float:right
+}
+</style>
+<body>
+
+<div class="wylog" >
+    <form action="/logout">
+        <button type="submit">Log Out</button>
+    </form>
+</div>
+
+
+<div class="container">
+    <form class="form-signin" method="post" action="/addbook" enctype="multipart/form-data">
+        <h2 class="form-signin-heading">Add Book Form</h2>
+
+        <span th:unless="${message == null}">
+         <p >
+                <a th:text="${message}"></a>
+        </p>
+
+        </span>
+
+        <p>
+            <label for="title" class="sr-only">Title</label>
+            <input type="text" id="title" name="title" class="form-control" placeholder="Title" required >
+        </p>
+        <p>
+            <label for="author" class="sr-only">Author</label>
+            <input type="author" id="author" name="author" class="form-control" placeholder="Author" required>
+        </p>
+        <p>
+            <textarea id="bookDescription"  name="bookDescription">Book Description...</textarea>
+
+        </p>
+        <p>
+            <label for="ilosc" class="sr-only">ilosc</label>
+            <input min="1" type="number" id="ilosc" name="ilosc" class="form-control" placeholder="Amount" >
+        </p>
+
+        <p>
+            <input type="file" name="file" class="form-control-file" required>
+        </p>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
+    </form>
+    <form class="form-signin" method="get" action="/view/1">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Back</button>
+    </form>
+</div>
+</body></html>
