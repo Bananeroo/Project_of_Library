@@ -47,7 +47,9 @@ just comment first line and uncomment second one but..... u also need to remove 
  
  If application work you can go to web browser and type "http://localhost:8080/login" that should get you to login screen, all added user that can log in are listed
 in file "ClientConfig" if u want to log as admin 
+
 email : "zbigniew.romański@interia.pl"
+
 password : "password"
 
 # That's all Folks
